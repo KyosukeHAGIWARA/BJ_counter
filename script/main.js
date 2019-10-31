@@ -1,7 +1,7 @@
 function template(strings, ...keys) {
-    return (function(...values) {
+    return (function (...values) {
         let result = [strings[0]];
-        keys.forEach(function(key, i) {
+        keys.forEach(function (key, i) {
             let value = values[key];
             result.push(value, strings[i + 1]);
         });
@@ -65,19 +65,23 @@ const app = new Vue({
             const diff = this.running_counter - this.key_count;
             this.indicator_d = "M 100 10 L " + (100 + this.w_tick * diff) + " 10";
 
-            let ind_color = diff < 0 ? template`rgba(255, 99, 71, ${0})`: template`rgba(60, 179, 113, ${0})`;
+            let ind_color = diff < 0 ? template `rgba(255, 99, 71, ${0})` : template `rgba(60, 179, 113, ${0})`;
             this.fill_rgba = ind_color(0.5 + Math.abs(diff) / (2 * this.indicator_end));
         }
     }
 });
 
 // キー入力検知
-document.onkeydown = function(e) {
+document.onkeydown = function (e) {
     console.log(e.key);
     if (e.key === 'a') app.card_draw(1); //up
     else if (e.key === 's') app.card_draw(0); //up
     else if (e.key === 'd') app.card_draw(-1); //up
-    else if (e.key === 'Enter') app.reset(); //up
+    else if (e.key === 'Enter') {
+        const dn = app.deck_num;
+        console.log(dn);
+        app.init_counter(dn); //up
+    }
     // else if (e.keyCode == 37) vm.keydownFn(false, -1, 0); //left
     // else if (e.keyCode == 40) vm.keydownFn(false, 0, 1); //down
     // else if (e.keyCode == 39) vm.keydownFn(false, 1, 0); //right
@@ -94,7 +98,7 @@ document.onload = app.init_counter(4);
 var t = 0;
 document.documentElement.addEventListener('touchend', function (e) {
     var now = new Date().getTime();
-    if ((now - t) < 150){
+    if ((now - t) < 150) {
         e.preventDefault();
     }
     t = now;

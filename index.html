@@ -1,92 +1,110 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>BJ Counter</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="./style/main.css">
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+    </script>
 
 
 </head>
+
 <body>
 
-<div id="app">
+    <div id="app">
 
-    <div class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8">
-                    <h3>BJ Counter - <small>counting for BlackJack</small></h3>
-                </div>
-                <div class="col-sm-4">
-                    <div class="container ele-block"><h3>{{card_num}} Cards Left</h3></div>
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h3>BJ Counter - <small>counting for BlackJack</small></h3>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="container ele-block">
+                            <h3>{{card_num}} Cards Left</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 
-    <div class="container">
-        <div class="btn-group btn-group-toggle container" data-toggle="buttons">
-            <label class="btn btn-secondary" v-on:click="init_counter(1)">
-                <input type="radio" name="deck_num" autocomplete="off">1 deck
-            </label>
-            <label class="btn btn-secondary" v-on:click="init_counter(2)">
-                <input type="radio" name="deck_num" autocomplete="off">2 deck
-            </label>
-            <label class="btn btn-secondary active" v-on:click="init_counter(4)">
-                <input type="radio" name="deck_num" autocomplete="off" checked>4 deck
-            </label>
-            <label class="btn btn-secondary" v-on:click="init_counter(6)">
-                <input type="radio" name="deck_num" autocomplete="off">6 deck
-            </label>
-            <label class="btn btn-secondary" v-on:click="init_counter(8)">
-                <input type="radio" name="deck_num" autocomplete="off">8 deck
-            </label>
-        </div>
-    </div>
-
-
-    <div class="container">
-        <svg viewbox="0 0 200 20" width="100%" height="100%" >
-            <!--<line :x1="x1" y1=0 x2=150 y2=20 stroke="black"></line>-->
-            <path :d="indicator_d" :stroke="fill_rgba" stroke-width="5"></path>
-            <!--<rect height="20" :width="20" :x="150 + 10*x1" y="10" fill="grey"></rect>-->
-        </svg>
-    </div>
-
-    <div class="container center"><h1>{{message}}</h1></div>
-    <!--<div class="container ele-block"><h3>Current Card Count: {{card_counter}}</h3></div>-->
-    <!--<div class="container ele-block"><h3>Current Counter : {{running_counter}}</h3></div>-->
-    <!--<div class="container ele-block"><h3>Key Count : {{key_count}}</h3></div>-->
         <div class="container">
-        <div class="row">
-            <div class="col-sm-4 center"><button v-on:click="card_draw(1)" class="col-sm-11 btn-lg btn btn-info">2-7</button></div>
-            <div class="col-sm-4 center"><button v-on:click="card_draw(0)" class="col-sm-11 btn-lg btn btn-info">8-9</button></div>
-            <div class="col-sm-4 center"><button v-on:click="card_draw(-1)" class="col-sm-11 btn-lg btn btn-info">10-A</button></div>
-            <!--<button v-on:click="card_draw(1)" class="col-sm-4 btn-lg btn btn-info seventh">2-7</button>-->
-            <!--<button v-on:click="card_draw(0)" class="col-sm-4 btn-lg btn btn-info seventh">8-9</button>-->
-            <!--<button v-on:click="card_draw(-1)" class="col-sm-4 btn-lg btn btn-info seventh">10-A</button>-->
+            <div class="btn-group btn-group-toggle container" data-toggle="buttons">
+                <label class="btn btn-secondary" v-on:click="init_counter(1)">
+                    <input type="radio" name="deck_num" autocomplete="off">1 deck
+                </label>
+                <label class="btn btn-secondary" v-on:click="init_counter(2)">
+                    <input type="radio" name="deck_num" autocomplete="off">2 deck
+                </label>
+                <label class="btn btn-secondary active" v-on:click="init_counter(4)">
+                    <input type="radio" name="deck_num" autocomplete="off" checked>4 deck
+                </label>
+                <label class="btn btn-secondary" v-on:click="init_counter(6)">
+                    <input type="radio" name="deck_num" autocomplete="off">6 deck
+                </label>
+                <label class="btn btn-secondary" v-on:click="init_counter(8)">
+                    <input type="radio" name="deck_num" autocomplete="off">8 deck
+                </label>
+            </div>
         </div>
-        <!--<button v-on:click="card_draw(1)" class="col-sm-4">2-7</button>-->
-        <!--<button v-on:click="card_draw(0)" class="col-sm-4">8-9</button>-->
-        <!--<button v-on:click="card_draw(-1)" class="col-sm-4">10-A</button>-->
+
+
+        <div class="container">
+            <svg viewbox="0 0 200 20" width="100%" height="100%">
+                <!--<line :x1="x1" y1=0 x2=150 y2=20 stroke="black"></line>-->
+                <path :d="indicator_d" :stroke="fill_rgba" stroke-width="5"></path>
+                <!--<rect height="20" :width="20" :x="150 + 10*x1" y="10" fill="grey"></rect>-->
+            </svg>
         </div>
-    <!--<input  v-on:keyup.65="plus1">-->
 
-</div>
+        <div class="container center">
+            <h1>{{message}}</h1>
+        </div>
+        <!--<div class="container ele-block"><h3>Current Card Count: {{card_counter}}</h3></div>-->
+        <!--<div class="container ele-block"><h3>Current Counter : {{running_counter}}</h3></div>-->
+        <!--<div class="container ele-block"><h3>Key Count : {{key_count}}</h3></div>-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 center"><button v-on:click="card_draw(1)"
+                        class="col-sm-11 btn-lg btn btn-info">2-7</button></div>
+                <div class="col-sm-4 center"><button v-on:click="card_draw(0)"
+                        class="col-sm-11 btn-lg btn btn-info">8-9</button></div>
+                <div class="col-sm-4 center"><button v-on:click="card_draw(-1)"
+                        class="col-sm-11 btn-lg btn btn-info">10-A</button></div>
+                <!--<button v-on:click="card_draw(1)" class="col-sm-4 btn-lg btn btn-info seventh">2-7</button>-->
+                <!--<button v-on:click="card_draw(0)" class="col-sm-4 btn-lg btn btn-info seventh">8-9</button>-->
+                <!--<button v-on:click="card_draw(-1)" class="col-sm-4 btn-lg btn btn-info seventh">10-A</button>-->
+            </div>
+            <!--<button v-on:click="card_draw(1)" class="col-sm-4">2-7</button>-->
+            <!--<button v-on:click="card_draw(0)" class="col-sm-4">8-9</button>-->
+            <!--<button v-on:click="card_draw(-1)" class="col-sm-4">10-A</button>-->
+        </div>
+        <!--<input  v-on:keyup.65="plus1">-->
+
+    </div>
 
 
-<script src="https://unpkg.com/vue@2.5.13/dist/vue.min.js"></script>
-<script src="./script/main.js"></script>
+    <script src="https://unpkg.com/vue@2.5.13/dist/vue.min.js"></script>
+    <script src="./script/main.js"></script>
+
 
 
 
 </body>
+
 </html>
