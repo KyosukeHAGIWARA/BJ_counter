@@ -1,12 +1,19 @@
 # BJ_counter
 
 ## Usage
-[BJ counter](http://bjcounter.html.xdomain.jp/)
+[BJ counter](https://bj-counter-1b168.firebaseapp.com/)
 
 1. Select deck size
 1. Count with Buttons
-    + Instead, Use Keyboard A:+1 S:0 D:-1
-1. For Reset, Select deck size again OR Leave No cards
+    + Instead, Use Keyboard 
+
+    | Key | Point | Number |
+    | --- | ----- | ------ |
+    | A   | +1    | 2-7    |
+    | S   | 0     | 8-9    |
+    | D   | -1    | 10-A   |
+
+1. For Reset, Select deck size again OR Leave No cards OR Press `Enter Key`
 
 ## Author
 + Rawashi
